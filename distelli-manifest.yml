@@ -1,0 +1,29 @@
+saranshmanu/ECDSA:
+  # Distelli Manifest example
+  # this example assumes the build and deploy servers are:
+  # The same architecture (32 vs 64 bit)
+  # Ubuntu 14.04
+  # Installed Packages: apt-get
+  #
+
+  PreRelease:
+    - echo "–--Beginning PreRelease---"
+    - echo "--Installing build dependencies--"
+    - echo "-Updating apt-get-"
+    - sudo apt-get -y update
+    - echo "-Installing GoLang-"
+    - sudo apt-get -y install golang
+    - echo “--Building--”
+    - cd src
+    - go build -o ../bin/server
+    - echo “--Testing--”
+    - go test
+
+  PkgInclude:
+    - bin/server
+
+  Env:
+    - PORT: "8002"
+
+  Exec:
+    - exec ./bin/server $PORT
