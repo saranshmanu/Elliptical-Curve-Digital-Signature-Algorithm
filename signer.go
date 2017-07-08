@@ -8,11 +8,21 @@ import (
 	"github.com/btcsuite/btcd/btcec"
 	"github.com/gorilla/mux"
 	"net/http"
+	"os"
 )
 type returnSignatureStructure struct {
     Signature   string `json:"signature,omitempty"`
 }
 var sign returnSignatureStructure
+
+func determineListenAddress() (string, error) {
+  port := os.Getenv("PORT")
+  if port == "" {
+    return "", fmt.Errorf("$PORT not set")
+  }
+  return ":" + port, nil
+}
+
 func returnSignature(w http.ResponseWriter, r *http.Request){
 	vars := mux.Vars(r)
 	var tosign string
@@ -54,9 +64,22 @@ func Sign(private, data []byte) ([]byte, error) {
 	return sig.Serialize(), nil
 }
 
+func home(w http.ResponseWriter, r *http.Request){
+	fmt.Println("successfully connected")
+}
+
 func main() {
 	myRouter := mux.NewRouter().StrictSlash(true)
 	myRouter.HandleFunc("/signature/{privateKey}/{toSign}", returnSignature).Name("/signature/{privateKey}/{toSign}").Methods("GET")
+	myRouter.HandleFunc("/home", home)
+	addr, err := determineListenAddress()
+	if err != nil {
+		log.Fatal(err)
+	}
 	http.Handle("/", myRouter)
-	log.Fatal(http.ListenAndServe(":10000", myRouter))
+	log.Printf("Listening on %s...\n", addr)
+  if err := http.ListenAndServe(addr, nil); err != nil {
+    panic(err)
+  }
+	//log.Fatal(http.ListenAndServe(":8080", myRouter))
 }

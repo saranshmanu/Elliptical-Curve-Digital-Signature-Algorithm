@@ -1,0 +1,20 @@
+{
+	"ImportPath": "Elliptical-Curve-Digital-Signature-Algorithm",
+	"GoVersion": "go1.8",
+	"GodepVersion": "v79",
+	"Packages": [
+		"./..."
+	],
+	"Deps": [
+		{
+			"ImportPath": "github.com/btcsuite/btcd/btcec",
+			"Comment": "BTCD_0_12_0_BETA-351-g948d80b",
+			"Rev": "948d80b1988264b0fb6ef009b1a989511f08227e"
+		},
+		{
+			"ImportPath": "github.com/gorilla/mux",
+			"Comment": "v1.4.0-13-gac112f7",
+			"Rev": "ac112f7d75a0714af1bd86ab17749b31f7809640"
+		}
+	]
+}
