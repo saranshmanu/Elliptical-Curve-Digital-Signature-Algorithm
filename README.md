@@ -1,0 +1,4 @@
+# Elliptical-Curve-Digital-Signature-Algorithm
+API to sign hash value using secp256k1 curve for blockchain applications
+
+Because of the popularity of Blockchain, one of its main building blocks, Elliptic Curve Digital Signature Algorithm (ECDSA) is hotly discussed as well. Since Bitcoin is decentralized, trans- actions will not go through to a third party so that two willing parties communication depend on cryptographic proof instead of trust. Therefore ECDSA, a digital signature scheme based on elliptic curve cryptography, is used to prove blockchain address ownership and sign blockchain transactions. ECDSA keys used to generate blockchain addresses and sign transactions are derived from the certain parameters. NIST has been recommending secp256r1 to be used , however, unlike most applications, Bitcoin protocol chooses secp256k1 which is almost never used to generate private and public key pairs.
